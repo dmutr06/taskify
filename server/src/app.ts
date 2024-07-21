@@ -2,8 +2,10 @@ import { readdir, lstat } from "fs/promises";
 import path from "path";
 
 import logger from "./logger";
-import express, { Router } from "express";
+import express, { NextFunction, Request, Response, Router } from "express";
+import cors from "cors";
 import mongoose from "mongoose";
+import { HttpError } from "./errors/httpError";
 
 export class App {
     private router: Router;
@@ -61,15 +63,16 @@ export class App {
             
             for (const route in dynRoutes)
                 if ((await lstat(path.join(fullPath, dynRoutes[route]))).isDirectory())
-                  await this.loadHandlers(path.join(curPath, dynRoutes[route]));
+                    await this.loadHandlers(path.join(curPath, dynRoutes[route]));
                 else
-                  await this.useHandler(curPath, dynRoutes[route]);
+                    await this.useHandler(curPath, dynRoutes[route]);
         } catch (err) {
             logger.error("Something went wrong...\n", err);
+            process.exit(-1);
         }
     }
 
-    private async connectToDb() {
+    private async connectToDb(): Promise<void> {
         try {
             await mongoose.connect(process.env.MONGODB_URI!);
             logger.info("Successfully connected to the database");
@@ -86,12 +89,23 @@ export class App {
         const port = Number(process.env.PORT) || 6969;
 
         const app = express();
-      
+         
         app.use(express.json());
         app.use(express.urlencoded({
             extended: true
         }));
+        app.use(cors());
         app.use(base, this.router);
+
+        app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+            if (err instanceof HttpError) {
+                return res.status(err.status).json(err);
+            }
+            
+            logger.error(err);
+            
+            res.status(404).json(HttpError.smthingWentWrong());
+        });
 
         app.listen(port, () => {
             logger.info(`Server has been started at port ${port}`);

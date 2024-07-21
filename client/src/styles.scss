@@ -1,0 +1,28 @@
+@use "/node_modules/css-reset-and-normalize/scss/reset-and-normalize.scss";
+@use "node_modules/css-reset-and-normalize/scss/link-reset.scss";
+@use "node_modules/css-reset-and-normalize/scss/button-reset.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0f0f0f;
+  color: #fff;
+  height: 100vh;
+}
+
+.container {
+  padding-inline: 2rem;
+}
+
+main {
+  padding-top: 2rem;
+  flex-grow: 1;
+}
+
+.layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

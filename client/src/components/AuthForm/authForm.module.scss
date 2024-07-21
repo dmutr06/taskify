@@ -1,0 +1,100 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 10rem;
+  padding-bottom: 4rem;
+  padding-top: 1rem;
+}
+
+.form {
+  background: #222;
+  width: 100%;
+  max-width: 60rem;
+  height: 100%;
+  border-radius: 2rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: solid 2px #444;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 4rem;
+  padding-top: 2rem;
+  gap: 2rem;
+}
+
+.input {
+  font-size: 2rem;
+  border: none;
+  outline: none;
+  background-color: #444;
+  color: #fff;
+  padding-block: 1rem;
+  padding-inline: 3rem;
+  border: 4px solid red;
+  border-radius: 1rem;
+  transition: .3s border;
+  
+  &:focus {
+    border: 4px solid #f00;
+    &:valid {
+      border: 4px solid #777;
+    }
+  }
+
+  &:valid {
+    border: 4px solid transparent;
+  }
+}
+
+.btn {
+  background-color: #111;
+  padding-block: 1.5rem;
+  padding-inline: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 2rem;
+  border-radius: 1rem;
+  transition: .3s scale;
+
+  &:hover {
+    scale: 0.97;
+  }
+
+  &:active {
+    scale: 0.9;
+  }
+}
+
+.toggle {
+  flex-grow: 1;
+  position: relative;
+
+  div {
+    font-size: 1.5rem;
+    color: #999;
+    position: absolute;
+    bottom: 1rem;
+    right: 2rem;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: underline;
+  }
+}
+
+

@@ -1,18 +1,31 @@
-import { Schema, Model, model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 export interface IUser {
   name: string,
   email: string,
   password: string,
   createdAt: Date,
+  tasks: Schema.Types.ObjectId[], 
 }
 
-const userSchema = new Schema<IUser, Model<IUser>>({
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-    createdAt: { type: Date, required: true },
+export interface UserRegisterDto {
+  name: string,
+  email: string,
+  password: string,
+}
+
+export interface UserLoginDto {
+  name: string,
+  password: string,
+}
+
+const userSchema = new Schema<IUser>({
+    name: String,
+    email: String,
+    password: String,
+    createdAt: Date,
+    tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
 });
 
-export const User = model<IUser, Model<IUser>>("User", userSchema);
+export const User = model<IUser>("User", userSchema);
 
