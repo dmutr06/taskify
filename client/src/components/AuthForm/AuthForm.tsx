@@ -2,7 +2,7 @@ import { FC, FormEvent, useState } from "react";
 import { useAuth } from "../../hooks/auth.hook";
 
 import styles from "./authForm.module.scss";
-import { useFetch } from "use-http";
+import { useFetch } from "../../hooks/http.hook";
 
 interface LoginData {
   name: string,
@@ -18,7 +18,7 @@ interface RegisterData {
 const AuthForm: FC = () => {
   const [isRegister, setIsRegister] = useState<boolean>(true);
 
-  const { post, loading, error, response } = useFetch<{ jwt: string }>("/api/users", { "cache": "no-store" });
+  const { post, loading, error, setUrl } = useFetch<{ jwt: string }>("/api/users");
 
   const { setToken } = useAuth();
 
@@ -42,11 +42,14 @@ const AuthForm: FC = () => {
     if (!data.get("name")) return;
     if (!data.get("password")) return;
     if (!data.get("email") && isRegister) return;
+
+    if (isRegister) setUrl("/api/users/register");
+    else setUrl("/api/users/login");
       
-    const res = await post(isRegister ? "register" : "login", { name: data.get("name"), password: data.get("password") });
+    const res = await post({ body: JSON.stringify(Object.fromEntries(data)) });
     
-    if (response.ok)
-      setToken(res.jwt);
+    if (res.ok)
+      setToken(res.body.jwt);
   };
 
   return (
@@ -75,10 +78,12 @@ const AuthForm: FC = () => {
             />
             <button className={styles.btn} disabled={loading} type="submit">{loading ? "Loading..." : "Submit"}</button>
           </div>
+          <div className={styles.error}></div>
           <div className={styles.toggle}>
             <div onClick={toggleIsRegister}>
               {isRegister ? "Already registered? Sign in" : "Don't have account? Register"}
             </div>
+            
           </div>
       </form>
     </div>

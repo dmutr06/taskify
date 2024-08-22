@@ -16,18 +16,20 @@ export const POST = asyncHandler(async ({ body, user: name }: UserRequest<TaskCr
     
     if (!user)
       throw AuthError.unauthorized();
-
-    user.tasks.push((await Task.create<ITask>({
+    
+    const task = await Task.create<ITask>({
         title: body.title,
         description: body.description,
         priority: body.priority,
         createdAt: new Date(),
         owner: user.id 
-    })).id);
+    });
+
+    user.tasks.push(task.id);
 
     await user.save();
 
-    res.send("Task has been created");
+    res.json(task);
 });
 
 export const GET = asyncHandler(async ({ user: name, query }: UserRequest, res) => {

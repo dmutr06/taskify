@@ -5,7 +5,6 @@ import { AuthError } from "../../errors/authError";
 import { HttpError } from "../../errors/httpError";
 import { User } from "../../models/user";
 import { ITask, Task } from "../../models/task";
-import logger from "../../logger";
 
 export const GET = asyncHandler(async ({ user: name, ...req }: UserRequest, res) => {
     if (!name) throw AuthError.unauthorized(); 
@@ -32,8 +31,6 @@ export const DELETE = asyncHandler(async ({ user: name, params }: UserRequest, r
     
     if (!user) throw AuthError.unauthorized();
 
-    logger.debug(user.id);
-    
     const task = await Task.findById(params.id).where({ owner: user.id });
 
     if (!task) throw HttpError.badRequest();

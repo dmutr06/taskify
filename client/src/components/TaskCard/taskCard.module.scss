@@ -1,0 +1,30 @@
+.item {
+  background-color: var(--primary-color);
+  padding-inline: 3rem;
+  padding-block: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.description {
+  font-size: 1.5rem;
+  padding-top: 1rem;
+  color: #999;
+}
+
+.delete {
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--second-color);
+  border-radius: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

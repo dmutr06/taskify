@@ -2,6 +2,8 @@
 @use "node_modules/css-reset-and-normalize/scss/link-reset.scss";
 @use "node_modules/css-reset-and-normalize/scss/button-reset.scss";
 
+@use "./vars.scss";
+
 * {
   box-sizing: border-box;
 }
@@ -25,4 +27,12 @@ main {
   height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.tasks-page {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 2rem;
+  height: 100%;
+  padding-bottom: 3rem;
 }

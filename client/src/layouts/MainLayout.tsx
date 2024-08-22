@@ -1,11 +1,8 @@
 import { FC } from "react";
-import Header from "../components/Header/Header";
-
 
 export const MainLayout: FC<{ children: React.ReactElement | React.ReactElement[] }> = ({ children }) => {
   return (
-    <div className="layout">
-      <Header />
+    <div className="layout container">
       <main>{children}</main>
     </div>
   );

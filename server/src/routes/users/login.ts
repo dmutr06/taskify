@@ -11,7 +11,6 @@ export const POST: Handler = asyncHandler<UserLoginDto>(async ({ body }, res) =>
     if (!body || !("name" in body) || !("password" in body))
         throw HttpError.badRequest();
     
-    logger.debug(body);
     const user = await User.findOne<IUser>({ name: body.name });
 
     if (!user || await compare(user.password, body.password)) throw AuthError.badNameOrPassword();
