@@ -12,7 +12,6 @@ async function bootstrap(): Promise<void> {
     const app = new App();
 
     app.run("/api");
-    
 }
 
 bootstrap();

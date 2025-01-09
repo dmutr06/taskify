@@ -41,7 +41,9 @@ export const GET = asyncHandler(async ({ user: name, query }: UserRequest, res) 
 
     const offset = Number(query.offset);
     const limit = Number(query.limit) || Infinity;
-    
+
+
+    if (user.tasks.length == 0) return void res.json([]);  
     if (offset >= user.tasks.length) throw HttpError.badRequest();
 
     res.json(user.tasks.splice(offset, limit));
