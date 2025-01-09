@@ -20,7 +20,7 @@ const AuthForm: FC = () => {
 
   const { post, loading, error, setUrl } = useFetch<{ jwt: string }>("/api/users");
 
-  const { setToken } = useAuth();
+  const { setToken, resetToken } = useAuth();
 
   const toggleIsRegister = () => setIsRegister(prev => !prev);
   
@@ -46,7 +46,7 @@ const AuthForm: FC = () => {
     if (isRegister) setUrl("/api/users/register");
     else setUrl("/api/users/login");
       
-    const res = await post({ body: JSON.stringify(Object.fromEntries(data)) });
+    const res = await post(Object.fromEntries(data));
     
     if (res.ok)
       setToken(res.body.jwt);
