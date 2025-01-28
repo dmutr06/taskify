@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.50",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --hot src/main.ts",
+    "build": "bun build ./src/main.ts --target=bun --outfile=./build/app.js --minify",
+    "start": "bun run ./build/app.js"
+  },
+  "dependencies": {
+    "@elysiajs/jwt": "^1.2.0",
+    "@elysiajs/swagger": "^1.2.0",
+    "@prisma/client": "^6.2.1",
+    "elysia": "latest",
+    "openid-client": "^6.1.7"
+  },
+  "devDependencies": {
+    "@types/openid-client": "^3.7.0",
+    "bun-types": "latest",
+    "prisma": "^6.2.1"
+  },
+  "module": "src/main.js"
+}
