@@ -3,11 +3,12 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --hot src/main.ts",
-    "build": "bun build ./src/main.ts --target=bun --outfile=./build/app.js --minify",
+    "dev": "bun run --watch src/main.ts",
+    "build": "bun build ./src/main.ts --target=bun --outfile=./build/app.js",
     "start": "bun run ./build/app.js"
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.2.0",
     "@elysiajs/jwt": "^1.2.0",
     "@elysiajs/swagger": "^1.2.0",
     "@prisma/client": "^6.2.1",

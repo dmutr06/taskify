@@ -17,9 +17,9 @@ export const userService = new Elysia({ name: "service/user" })
         async beforeHandle({ jwt, headers, getUser }) {
           const maybeUser = await jwt.verify(headers["authorization"]);
 
-          if (!maybeUser) return { status: 401, message: "Unauthorized" };
+          if (!maybeUser || !maybeUser.sub) return { status: 401, message: "Unauthorized" };
 
-          const user = await getUser!(Number(maybeUser.sub));
+          const user = await getUser!(maybeUser.sub);
 
           if (!user) return { status: 401, message: "Unauthorized" };
 

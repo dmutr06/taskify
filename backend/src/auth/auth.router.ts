@@ -1,4 +1,4 @@
-import { Elysia } from "elysia";
+import { Elysia, redirect } from "elysia";
 import * as client from "openid-client";
 import { jwt } from "@elysiajs/jwt";
 import { userRepo } from "../user";
@@ -22,7 +22,7 @@ export const authRouter = new Elysia({ prefix: "/auth" })
 
     return redirect(redirectTo.href);
   })
-  .get("/google/callback", async ({ request, jwt, createUserOrGetIfExists }) => {
+  .get("/google/callback", async ({ request, jwt, createUserOrGetIfExists, redirect }) => {
     const tokens = await client.authorizationCodeGrant(config, request);
 
     const userInfo = await client.fetchUserInfo(config, tokens.access_token, tokens.claims()?.sub!);
@@ -31,5 +31,5 @@ export const authRouter = new Elysia({ prefix: "/auth" })
 
     const token = await jwt.sign({ sub: String(user.id) });
 
-    return { token };
+    return redirect(`http://localhost:5173/auth/callback?token=${token}`);
   });

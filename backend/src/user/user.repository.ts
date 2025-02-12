@@ -9,11 +9,11 @@ export const userRepo = new Elysia({ name: "repo/user" })
       if (await prisma.user.findUnique({ where: { email: data.email } })) {
         return null;
       }
-
+      
       return prisma.user.create({ data });  
     },
 
-    async getUser(id: number): Promise<User | null> {
+    async getUser(id: User["id"]): Promise<User | null> {
       return prisma.user.findUnique({ where: { id } });
     },
     
