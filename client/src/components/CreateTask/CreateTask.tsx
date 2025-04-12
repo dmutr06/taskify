@@ -15,10 +15,14 @@ const CreateTask: FC<{ addNewTodo: (task: ITask) => void }> = ({ addNewTodo }) =
 
         const data = new FormData(e.currentTarget);
 
+        if (data.get("title")?.toString()?.length == 0) return;
+
         const res = await post(Object.fromEntries(data));
 
-        if (res.ok)
+        if (res.ok) {
             addNewTodo(res.body);
+            (e.target as HTMLFormElement).reset();
+        }
     };
 
     return (
