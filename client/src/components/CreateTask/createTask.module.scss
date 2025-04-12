@@ -7,6 +7,9 @@
   flex-direction: column;
   gap: 1rem;
   overflow: hidden;
+  align-self: start;
+  position: sticky;
+  top: 2rem;
 
   input, select {
     color: #fff;

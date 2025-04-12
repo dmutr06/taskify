@@ -8,7 +8,6 @@ async function bootstrap(): Promise<void> {
     if (process.env.LOGGER == "disabled")
       logger.settings.type = "hidden";
       
-
     const app = new App();
 
     app.run("/api");

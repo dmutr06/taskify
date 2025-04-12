@@ -6,18 +6,18 @@ import NotFound from "./pages/NotFound";
 import MainLayout from "./layouts/MainLayout";
 
 export const router = createBrowserRouter([
-  {
-    errorElement: <NotFound />,
-    element: <MainLayout><AuthProvider /></MainLayout>,
-    children: [
-      {
-        path: "/",
-        element: <TasksPage />,
-      },
-      {
-        path: "/auth",
-        element: <AuthPage />,
-      }
-    ]
-  }
+    {
+        errorElement: <NotFound />,
+        element: <MainLayout><AuthProvider /></MainLayout>,
+        children: [
+            {
+                path: "/",
+                element: <TasksPage />,
+            },
+            {
+                path: "/auth",
+                element: <AuthPage />,
+            }
+        ]
+    }
 ]);

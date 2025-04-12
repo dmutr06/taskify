@@ -6,11 +6,11 @@ import TaskCard from "../TaskCard/TaskCard";
 
 
 const TaskList: FC<{ tasks: ITask[], removeTask: (id: string) => void }> = ({ tasks, removeTask }) => {
-  return (
-    <>
-      <ul className={styles.list}>{tasks.map((task) => <TaskCard removeTaskFromList={() => removeTask(task._id)} key={task._id} task={task} />)}</ul>
-    </>
-  );
+    return (
+        <>
+            <ul className={styles.list}>{tasks.map((task) => <TaskCard removeTaskFromList={() => removeTask(task._id)} key={task._id} task={task} />)}</ul>
+        </>
+    );
 };
 
 export default TaskList;

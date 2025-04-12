@@ -1,0 +1,48 @@
+.btn {
+  background-color: var(--btn-color);
+  color: #fff;
+  border: none;
+  outline: none;
+  min-width: 10rem;
+  min-height: 3rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 300ms all;
+  border-radius: 1rem;
+  padding-block: 1rem;
+  padding-inline: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: translateY(-.25rem);
+    transition: 500ms all;
+  }
+
+  &:disabled {
+    background-color: var(--primary-color);
+    transition: 500ms all;
+  }
+}
+
+.small {
+  min-width: 7rem;
+}
+
+.large {
+  min-width: 13rem;
+  font-size: 1.25rem;
+}
+
+.square {
+  min-width: 3rem;
+  width: 3rem;
+  aspect-ratio: 1;
+}
+
+.full {
+  min-width: 100%;
+  font-size: 1.5rem;
+  padding: 0.75rem;
+}

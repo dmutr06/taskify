@@ -30,29 +30,17 @@ main {
 }
 
 .tasks-page {
+  position: relative;
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 1fr 4rem; 
   gap: 2rem;
   padding-bottom: 3rem;
 
-  .tasks {
-    overflow-y: scroll;
-  }
-
   .btns {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
     gap: 1rem;
-    button {
-      background-color: var(--primary-color);
-      padding: 1rem;
-      border-radius: .5rem;
-
-      &:disabled {
-        background-color: var(--second-color);
-      }
-    }
   }
 }

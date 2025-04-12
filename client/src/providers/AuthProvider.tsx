@@ -6,25 +6,25 @@ export const AuthContext = createContext<{
   token: string | undefined, 
   setToken: (newToken: string) => void, 
   resetToken: () => void 
-  } | null>(null);
+      } | null>(null);
 
 const AuthProvider: FC = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(["auth"]);
-  const navigate = useNavigate();
-  const location = useLocation();
+    const [cookies, setCookie, removeCookie] = useCookies(["auth"]);
+    const navigate = useNavigate();
+    const location = useLocation();
   
-  useEffect(() => {
-    if (!cookies.auth && !location.pathname.startsWith("/auth")) return navigate("/auth");
-    if (cookies.auth && location.pathname.startsWith("/auth")) return navigate("/");
-  }, [cookies.auth, location.pathname, navigate]);
+    useEffect(() => {
+        if (!cookies.auth && !location.pathname.startsWith("/auth")) return navigate("/auth");
+        if (cookies.auth && location.pathname.startsWith("/auth")) return navigate("/");
+    }, [cookies.auth, location.pathname, navigate]);
 
-  return <AuthContext.Provider value={{
-    token: cookies.auth,
-    setToken: (newToken: string) => setCookie("auth", newToken),
-    resetToken: () => removeCookie("auth")
+    return <AuthContext.Provider value={{
+        token: cookies.auth,
+        setToken: (newToken: string) => setCookie("auth", newToken),
+        resetToken: () => removeCookie("auth")
     }}>
-    <Outlet />
-  </AuthContext.Provider>;
+        <Outlet />
+    </AuthContext.Provider>;
 };
 
 export default AuthProvider;
