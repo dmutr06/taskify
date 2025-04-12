@@ -7,7 +7,7 @@ import { useFetch } from "../../hooks/http.hook";
 const AuthForm: FC = () => {
     const [isRegister, setIsRegister] = useState<boolean>(true);
 
-    const { post, loading, error, setUrl } = useFetch<{ jwt: string }>("/api/users");
+    const { post, loading, setUrl } = useFetch<{ jwt: string }>("/api/users");
 
     const { setToken } = useAuth();
 
